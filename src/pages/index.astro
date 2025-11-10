@@ -1,0 +1,56 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome / ようこそ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: radial-gradient(circle at top, #eef, #fff);
+      }
+      h1 {
+        margin-bottom: 24px;
+        font-weight: 500;
+      }
+      .buttons {
+        display: flex;
+        gap: 16px;
+      }
+      a {
+        text-decoration: none;
+      }
+      .btn {
+        padding: 12px 28px;
+        font-size: 18px;
+        border-radius: 999px;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        min-width: 140px;
+        text-align: center;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome / ようこそ</h1>
+    <div class="buttons">
+      <a href="/en"><div class="btn">Welcome</div></a>
+      <a href="/ja"><div class="btn">ようこそ</div></a>
+    </div>
+  </body>
+</html>

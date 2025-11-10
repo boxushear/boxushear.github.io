@@ -1,0 +1,112 @@
+---
+import jaProfile from '../../content/profile-ja.json';
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>{jaProfile.nameKanji} - 履歴書</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        font-size: 16pt;
+        margin: 0 0 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 6px;
+      }
+      th, td {
+        border: 1px solid #000;
+        padding: 4px 6px;
+        vertical-align: top;
+      }
+      th {
+        background: #f5f5f5;
+        width: 18%;
+      }
+      .no-border {
+        border: none;
+      }
+      .small {
+        font-size: 8pt;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>履 歴 書</h1>
+
+    <table>
+      <tr>
+        <th>氏名</th>
+        <td>{jaProfile.nameKanji}</td>
+      </tr>
+      <tr>
+        <th>フリガナ</th>
+        <td>{jaProfile.nameKana}</td>
+      </tr>
+      <tr>
+        <th>生年月日</th>
+        <td>{jaProfile.birth}</td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td>{jaProfile.address}</td>
+      </tr>
+      <tr>
+        <th>電話</th>
+        <td>{jaProfile.phone}</td>
+      </tr>
+      <tr>
+        <th>E-mail</th>
+        <td>{jaProfile.email}</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>学歴</th>
+        <td>
+          {jaProfile.education.map((edu) => (
+            <div>{edu.period}　{edu.details}</div>
+          ))}
+        </td>
+      </tr>
+      <tr>
+        <th>職歴</th>
+        <td>
+          {jaProfile.workHistory.map((job) => (
+            <div>
+              {job.period}　{job.company}（{job.location}） {job.role}<br />
+            </div>
+          ))}
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>自己PR</th>
+        <td>
+          <div>{jaProfile.summary}</div>
+          {jaProfile.selfPR && <div style="margin-top:4px;">{jaProfile.selfPR}</div>}
+        </td>
+      </tr>
+    </table>
+
+    <div class="small">
+      ※ 本サンプルは自動生成用レイアウトです。必要に応じて実案件向けに調整してください。
+    </div>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "name": "Bo Xu",
+  "title": "Backend Engineer / SAP / Java",
+  "location": "Osaka, Japan",
+  "summary": "Backend engineer with experience in Java, SAP, and web development, currently working in Japan and focusing on reliable, maintainable systems.",
+  "skills": [
+    "Java",
+    "Spring / Spring Boot",
+    "SAP ABAP / SAP UI5",
+    "JavaScript / TypeScript",
+    "MySQL / Oracle",
+    "AWS (EC2, S3, Lambda)"
+  ],
+  "experience": [
+    {
+      "company": "KKNEXES",
+      "location": "Osaka, Japan",
+      "role": "Software Engineer",
+      "period": "2024 - Present",
+      "details": [
+        "Developing and maintaining backend systems for publishing and logistics.",
+        "Implementing batch processing with AWS services and SAP-related integrations."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Master's in Civil Engineering",
+      "location": "",
+      "period": "",
+      "details": [
+        "Later transitioned into software engineering and backend development."
+      ]
+    }
+  ]
+}

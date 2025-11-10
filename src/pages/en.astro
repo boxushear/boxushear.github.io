@@ -1,0 +1,124 @@
+---
+import enProfile from "../content/profile-en.json";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{enProfile.name} - CV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        padding: 32px 24px;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        max-width: 900px;
+        margin-inline: auto;
+        line-height: 1.6;
+      }
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 24px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 32px;
+      }
+      h2 {
+        margin-top: 24px;
+        margin-bottom: 8px;
+        font-size: 20px;
+        border-bottom: 1px solid #ddd;
+      }
+      ul {
+        padding-left: 20px;
+        margin-top: 4px;
+      }
+      .top-nav {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+      .download-btn {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 6px 14px;
+        border-radius: 16px;
+        border: 1px solid #888;
+        font-size: 14px;
+        text-decoration: none;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-nav">
+      <a href="/">Home</a>
+      <a href="/ja">日本語</a>
+    </div>
+
+    <header>
+      <h1>{enProfile.name}</h1>
+      <div>{enProfile.title}</div>
+      <div>{enProfile.location}</div>
+    </header>
+
+    <section>
+      <h2>Profile</h2>
+      <p>{enProfile.summary}</p>
+      <!-- 未来这里的按钮会接 PDF（自动生成后改 href） -->
+      <a class="download-btn" href="/downloads/cv-en.pdf" download>
+        Download CV (PDF)
+      </a>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <ul>
+        {enProfile.skills.map((s) => <li>{s}</li>)}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      {
+        enProfile.experience.map((job) => (
+          <div>
+            <strong>{job.role}</strong> - {job.company} ({job.period})
+            <div>{job.location}</div>
+            <ul>
+              {job.details.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      {
+        enProfile.education.map((edu) => (
+          <div>
+            <strong>{edu.school}</strong> {edu.period && `(${edu.period})`}
+            <ul>
+              {edu.details.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </section>
+  </body>
+</html>

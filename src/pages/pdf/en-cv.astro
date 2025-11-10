@@ -1,0 +1,87 @@
+---
+import enProfile from '../../content/profile-en.json';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{enProfile.name} - CV (PDF)</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 20mm;
+      }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 11pt;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 20pt;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font-size: 12pt;
+        margin: 14px 0 4px;
+        border-bottom: 1px solid #000;
+        padding-bottom: 2px;
+      }
+      .meta {
+        font-size: 9pt;
+        color: #555;
+      }
+      ul {
+        margin: 4px 0 0 18px;
+        padding: 0;
+      }
+      .section {
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{enProfile.name}</h1>
+    <div class="meta">
+      {enProfile.title}<br />
+      {enProfile.location}
+    </div>
+
+    <div class="section">
+      <h2>Profile</h2>
+      <p>{enProfile.summary}</p>
+    </div>
+
+    <div class="section">
+      <h2>Skills</h2>
+      <ul>
+        {enProfile.skills.map((s) => <li>{s}</li>)}
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Experience</h2>
+      {enProfile.experience.map((job) => (
+        <div style="margin-bottom:6px;">
+          <strong>{job.role}</strong> - {job.company} ({job.period})<br />
+          <span class="meta">{job.location}</span>
+          <ul>
+            {job.details.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="section">
+      <h2>Education</h2>
+      {enProfile.education.map((edu) => (
+        <div style="margin-bottom:4px;">
+          <strong>{edu.school}</strong> {edu.period && `(${edu.period})`}
+          <ul>
+            {edu.details.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </body>
+</html>

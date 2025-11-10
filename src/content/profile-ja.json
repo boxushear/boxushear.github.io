@@ -1,0 +1,35 @@
+{
+  "nameKanji": "徐 鸥珂",
+  "nameKana": "ジョ ハク",
+  "birth": "1990-05-10",
+  "address": "大阪府在住",
+  "phone": "080-0000-0000",
+  "email": "example@example.com",
+  "summary": "日本で勤務しているバックエンドエンジニア。Java、SAP、Web開発を中心に、安定した業務システムの設計・開発に従事。",
+  "skills": [
+    "Java／Spring",
+    "SAP ABAP／SAP UI5",
+    "JavaScript／TypeScript",
+    "RDB（MySQL／Oracle）",
+    "AWS基礎（EC2／S3／Lambda）"
+  ],
+  "workHistory": [
+    {
+      "company": "KKNEXES",
+      "location": "大阪府",
+      "role": "システムエンジニア",
+      "period": "2024年～現在",
+      "details": [
+        "出版・物流関連のシステム開発・運用保守。",
+        "AWSおよびSAP関連機能の設計・実装。"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "period": "修士課程修了",
+      "details": "土木工学専攻。その後、ITエンジニアとしてキャリア転換。"
+    }
+  ],
+  "selfPR": "要件整理から実装・テストまで一貫して対応可能。日本語・英語・中国語でのコミュニケーションが可能で、多文化環境での開発経験あり。"
+}
