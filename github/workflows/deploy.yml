@@ -1,9 +1,9 @@
-name: Deploy Astro site with PDF generation
+name: Build, generate PDFs and deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -31,26 +31,35 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright (for PDF)
+      - name: Install Playwright (Chromium)
         run: npx playwright install --with-deps chromium
 
-      - name: Generate PDFs
-        run: npm run generate:pdf
-
-      - name: Build site
+      # 先构建 Astro，生成 dist/
+      - name: Build Astro
         run: npm run build
 
-      - name: Upload artifact for Pages
+      # 启动静态服务器，用于 generate-pdf.mjs 访问 /pdf/... 页面
+      - name: Start static server
+        run: npx serve dist -l 4173 &
+
+      # 基于已构建的页面生成 3 个 PDF 到 dist/downloads
+      - name: Generate PDFs
+        env:
+          PDF_BASE_URL: http://localhost:4173
+        run: npm run generate:pdf
+
+      # 上传 dist 作为 Pages 工件
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: dist
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
