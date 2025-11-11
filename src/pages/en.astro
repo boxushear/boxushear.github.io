@@ -6,119 +6,519 @@ import enProfile from "../content/profile-en.json";
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>{enProfile.name} - CV</title>
+    <title>{enProfile.name} - Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <style>
+      :root {
+        --primary: #2575fc;
+        --primary-soft: #6a11cb;
+        --text-main: #222;
+        --text-sub: #555;
+        --bg: radial-gradient(circle at 20% 30%, #ffffff, #f2f5fa, #e7ebf0);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
-        padding: 32px 24px;
+        min-height: 100vh;
         font-family:
+          "Inter",
           system-ui,
           -apple-system,
-          BlinkMacSystemFont,
+          "Noto Sans JP",
           sans-serif;
-        max-width: 900px;
-        margin-inline: auto;
-        line-height: 1.6;
+        background: var(--bg);
+        color: var(--text-main);
       }
-      header {
+
+      a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ===== NAVBAR ===== */
+
+      .nav-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+      }
+
+      .nav {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 16px 24px 0;
         display: flex;
-        flex-direction: column;
-        gap: 4px;
-        margin-bottom: 24px;
+        align-items: flex-end;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
       }
-      h1 {
+
+      .nav-left {
+        font-size: 1.6rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--primary-soft), var(--primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: pointer;
+        padding-bottom: 6px;
+        border-bottom: 3px solid transparent;
+      }
+
+      .nav-tabs {
+        display: flex;
+        gap: 18px;
+        margin-left: auto;
+        flex-wrap: wrap;
+      }
+
+      .nav-tab {
+        font-size: 0.98rem;
+        padding: 6px 0;
+        cursor: pointer;
+        color: var(--text-sub);
+        border-bottom: 2px solid transparent;
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .nav-tab span.icon {
+        font-size: 0.9rem;
+        color: var(--primary);
+      }
+
+      .nav-tab.active,
+      .nav-left.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+
+      /* ===== LAYOUT & CARD ===== */
+
+      .page {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .section {
+        margin-top: 18px;
+      }
+
+      .card {
+        width: 100%;
         margin: 0;
-        font-size: 32px;
+        padding: 26px 26px 30px;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+        line-height: 1.8;
+        text-align: left;
       }
-      h2 {
-        margin-top: 24px;
-        margin-bottom: 8px;
-        font-size: 20px;
-        border-bottom: 1px solid #ddd;
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
-      ul {
-        padding-left: 20px;
+
+      .section-title i {
+        color: var(--primary);
+      }
+
+      .muted {
+        color: var(--text-sub);
+        font-size: 0.95rem;
+      }
+
+      .about-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--text-sub);
+        margin-bottom: 12px;
+      }
+
+      .about-contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 4px;
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
+      .about-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .about-contact-item i {
+        color: var(--primary);
+      }
+
+      .languages {
+        margin-top: 14px;
+      }
+
+      .languages-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        background: rgba(37, 117, 252, 0.06);
+        color: var(--primary);
+        margin-right: 6px;
         margin-top: 4px;
       }
-      .top-nav {
-        display: flex;
-        justify-content: flex-end;
-        gap: 12px;
-        margin-bottom: 12px;
-        font-size: 14px;
+
+      ul {
+        padding-left: 20px;
+        margin: 6px 0 0;
       }
+
+      .exp-item,
+      .proj-item {
+        margin-bottom: 14px;
+      }
+
+      .exp-role {
+        font-weight: 600;
+      }
+
+      .exp-meta {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
       .download-btn {
-        display: inline-block;
-        margin-top: 8px;
-        padding: 6px 14px;
-        border-radius: 16px;
-        border: 1px solid #888;
-        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 14px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: 1px solid var(--primary);
+        font-size: 0.9rem;
+        color: var(--primary);
         text-decoration: none;
-        color: #333;
+        transition: all 0.25s ease;
+      }
+
+      .download-btn:hover {
+        background: linear-gradient(90deg, var(--primary-soft), var(--primary));
+        color: #fff;
+        box-shadow: 0 6px 16px rgba(37, 117, 252, 0.35);
+      }
+
+      [data-content] {
+        display: none;
+      }
+
+      [data-content].active {
+        display: block;
+      }
+
+      /* ===== FOOTER ===== */
+
+      footer {
+        text-align: center;
+        font-size: 0.85rem;
+        color: #777;
+        padding: 24px 0 32px;
+      }
+
+      .footer-links {
+        margin-top: 12px;
+      }
+
+      .footer-links a {
+        color: var(--primary);
+        margin: 0 10px;
+        font-weight: 500;
+      }
+
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          flex-wrap: wrap;
+          align-items: flex-start;
+        }
+        .nav-tabs {
+          margin-left: 0;
+          justify-content: flex-start;
+        }
+        .page {
+          padding: 18px;
+        }
+        .card {
+          padding: 20px 16px 24px;
+        }
       }
     </style>
   </head>
+
   <body>
-    <div class="top-nav">
-      <a href="/">Home</a>
-      <a href="/ja">日本語</a>
+    <!-- NAVBAR -->
+    <div class="nav-wrapper">
+      <div class="nav">
+        <div class="nav-left" data-tab="about">{enProfile.name}</div>
+
+        <div class="nav-tabs">
+          <div class="nav-tab" data-tab="projects">
+            <span class="icon"><i class="fa-solid fa-diagram-project"></i></span
+            >
+            Projects
+          </div>
+          <div class="nav-tab" data-tab="experience">
+            <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
+            Experience
+          </div>
+          <div class="nav-tab" data-tab="skills">
+            <span class="icon"><i class="fa-solid fa-code"></i></span>
+            Skills
+          </div>
+          <div class="nav-tab" data-tab="education">
+            <span class="icon"><i class="fa-solid fa-user-graduate"></i></span>
+            Education
+          </div>
+          <div class="nav-tab" data-tab="certifications">
+            <span class="icon"><i class="fa-solid fa-certificate"></i></span>
+            Certifications
+          </div>
+        </div>
+      </div>
     </div>
 
-    <header>
-      <h1>{enProfile.name}</h1>
-      <div>{enProfile.title}</div>
-      <div>{enProfile.location}</div>
-    </header>
-
-    <section>
-      <h2>Profile</h2>
-      <p>{enProfile.summary}</p>
-      <!-- 未来这里的按钮会接 PDF（自动生成后改 href） -->
-      <a class="download-btn" href="/downloads/cv-en.pdf" download>
-        Download CV (PDF)
-      </a>
-    </section>
-
-    <section>
-      <h2>Skills</h2>
-      <ul>
-        {enProfile.skills.map((s) => <li>{s}</li>)}
-      </ul>
-    </section>
-
-    <section>
-      <h2>Experience</h2>
-      {
-        enProfile.experience.map((job) => (
-          <div>
-            <strong>{job.role}</strong> - {job.company} ({job.period})
-            <div>{job.location}</div>
-            <ul>
-              {job.details.map((d) => (
-                <li>{d}</li>
-              ))}
-            </ul>
+    <!-- CONTENT -->
+    <main class="page">
+      <!-- About -->
+      <section class="section" data-content="about">
+        <div class="card">
+          <div class="section-title">
+            <i class="fa-solid fa-user"></i> About
           </div>
-        ))
-      }
-    </section>
 
-    <section>
-      <h2>Education</h2>
-      {
-        enProfile.education.map((edu) => (
-          <div>
-            <strong>{edu.school}</strong> {edu.period && `(${edu.period})`}
-            <ul>
-              {edu.details.map((d) => (
-                <li>{d}</li>
-              ))}
-            </ul>
+          <div class="about-title">{enProfile.title}</div>
+
+          <div class="about-contact">
+            <div class="about-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              {enProfile.location}
+            </div>
+            <div class="about-contact-item">
+              <i class="fa-solid fa-phone"></i>
+              {enProfile.phone}
+            </div>
+            <div class="about-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <a href={"mailto:" + enProfile.email}>{enProfile.email}</a>
+            </div>
+            <div class="about-contact-item">
+              <i class="fa-solid fa-globe"></i>
+              <a href={enProfile.homepage} target="_blank">
+                {enProfile.homepage}
+              </a>
+            </div>
           </div>
-        ))
+
+          <div class="languages">
+            <div class="languages-items">
+              {
+                enProfile.languages?.map((lang) => (
+                  <span class="badge">
+                    {lang.name}: {lang.level}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+
+          <p class="muted" style="margin-top:16px;">
+            {enProfile.summary}
+          </p>
+
+          <a class="download-btn" href="/downloads/cv-en.pdf" download>
+            <i class="fa-solid fa-file-arrow-down"></i>
+            Download CV (PDF)
+          </a>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="section" data-content="projects">
+        <div class="card">
+          <div class="section-title">
+            <i class="fa-solid fa-diagram-project"></i> Projects
+          </div>
+          {
+            enProfile.projects?.map((p) => (
+              <div class="proj-item">
+                <div class="exp-role">
+                  {p.name}
+                  {p.tech && <span class="badge">{p.tech}</span>}
+                </div>
+                {p.period && <div class="exp-meta">{p.period}</div>}
+                {p.description && <div class="muted">{p.description}</div>}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section class="section" data-content="experience">
+        <div class="card">
+          <div class="section-title">
+            <i class="fa-solid fa-briefcase"></i> Experience
+          </div>
+          {
+            enProfile.experience?.map((job) => (
+              <div class="exp-item">
+                <div class="exp-role">{job.role}</div>
+                <div class="exp-meta">
+                  {job.company} | {job.location} | {job.period}
+                </div>
+                {job.details && (
+                  <ul>
+                    {job.details.map((d) => (
+                      <li>{d}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="section" data-content="skills">
+        <div class="card">
+          <div class="section-title">
+            <i class="fa-solid fa-code"></i> Skills
+          </div>
+          <ul>
+            {enProfile.skills?.map((s) => <li>{s}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="section" data-content="education">
+        <div class="card">
+          <div class="section-title">
+            <i class="fa-solid fa-user-graduate"></i> Education
+          </div>
+          {
+            enProfile.education?.map((edu) => (
+              <div class="exp-item">
+                <div class="exp-role">{edu.school}</div>
+                {edu.period && <div class="exp-meta">{edu.period}</div>}
+                {edu.details && (
+                  <ul>
+                    {edu.details.map((d) => (
+                      <li>{d}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Certifications -->
+      <section class="section" data-content="certifications">
+        <div class="card">
+          <div class="section-title">
+            <i class="fa-solid fa-certificate"></i> Certifications
+          </div>
+          {
+            enProfile.certifications && enProfile.certifications.length > 0 ? (
+              <ul>
+                {enProfile.certifications.map((c) => (
+                  <li>{c}</li>
+                ))}
+              </ul>
+            ) : (
+              <div class="muted">
+                Certifications and qualifications will be listed here.
+              </div>
+            )
+          }
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>© 2025 {enProfile.name} | Powered by Astro 🚀</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/ja">日本語</a>
+      </div>
+    </footer>
+
+    <script is:inline>
+      const tabs = document.querySelectorAll("[data-tab]");
+      const contents = document.querySelectorAll("[data-content]");
+      const nameTab = document.querySelector(".nav-left");
+
+      function activate(tab) {
+        contents.forEach((c) => {
+          c.classList.toggle("active", c.dataset.content === tab);
+        });
+        tabs.forEach((t) => {
+          t.classList.toggle("active", t.dataset.tab === tab);
+        });
+        if (nameTab) {
+          nameTab.classList.toggle("active", tab === "about");
+        }
       }
-    </section>
+
+      tabs.forEach((t) => {
+        t.addEventListener("click", () => {
+          activate(t.dataset.tab);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      if (nameTab) {
+        nameTab.addEventListener("click", () => {
+          activate("about");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      activate("about");
+    </script>
   </body>
 </html>

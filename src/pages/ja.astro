@@ -6,127 +6,545 @@ import jaProfile from "../content/profile-ja.json";
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <title>{jaProfile.nameKanji} - 職務情報</title>
+    <title>{jaProfile.nameKanji} - ポートフォリオ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <style>
+      :root {
+        --primary: #2575fc;
+        --primary-soft: #6a11cb;
+        --text-main: #222;
+        --text-sub: #555;
+        --bg: radial-gradient(circle at 20% 30%, #ffffff, #f2f5fa, #e7ebf0);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
-        padding: 32px 24px;
-        font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-        max-width: 900px;
-        margin-inline: auto;
-        line-height: 1.8;
+        min-height: 100vh;
+        font-family:
+          "Inter",
+          "Noto Sans JP",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text-main);
       }
-      .top-nav {
+
+      a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ===== NAV BAR ===== */
+
+      .nav-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+      }
+
+      .nav {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 16px 24px 0;
         display: flex;
-        justify-content: flex-end;
-        gap: 12px;
-        margin-bottom: 12px;
-        font-size: 14px;
+        align-items: flex-end;
+        justify-content: flex-start;
+        gap: 32px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       }
-      h1 {
-        margin: 0;
-        font-size: 28px;
+
+      .nav-left {
+        font-size: 1.6rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--primary-soft), var(--primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: pointer;
+        padding-bottom: 6px;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
       }
-      h2 {
-        margin-top: 24px;
+
+      .nav-tabs {
+        display: flex;
+        gap: 18px;
+        margin-left: auto;
+        flex-wrap: wrap;
+      }
+
+      .nav-tab {
+        font-size: 0.96rem;
+        padding: 6px 0;
+        cursor: pointer;
+        color: var(--text-sub);
+        border-bottom: 2px solid transparent;
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .nav-tab span.icon {
+        font-size: 0.9rem;
+        color: var(--primary);
+      }
+
+      .nav-tab.active,
+      .nav-left.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+
+      /* ===== LAYOUT ===== */
+
+      .page {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .section {
+        margin-top: 18px;
+      }
+
+      .card {
+        width: 100%;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 28px 28px 32px;
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+        line-height: 1.8;
+        text-align: left;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .section-title i {
+        color: var(--primary);
+      }
+
+      .muted {
+        color: var(--text-sub);
+        font-size: 0.95rem;
+      }
+
+      .about-title {
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: var(--text-sub);
         margin-bottom: 8px;
-        font-size: 18px;
-        border-bottom: 1px solid #ddd;
       }
-      .label {
-        color: #666;
-        font-size: 14px;
+
+      .about-contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 6px;
+        font-size: 0.9rem;
+        color: var(--text-sub);
       }
-      ul {
-        padding-left: 20px;
+
+      .about-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .about-contact-item i {
+        color: var(--primary);
+      }
+
+      .languages {
+        margin-top: 14px;
+      }
+
+      .languages-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        background: rgba(37, 117, 252, 0.06);
+        color: var(--primary);
+        margin-right: 6px;
         margin-top: 4px;
       }
+
+      ul {
+        padding-left: 20px;
+        margin: 6px 0 0;
+      }
+
+      .exp-item,
+      .proj-item {
+        margin-bottom: 14px;
+      }
+
+      .exp-role {
+        font-weight: 600;
+      }
+
+      .exp-meta {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
       .download-btn {
-        display: inline-block;
-        margin-top: 8px;
-        padding: 6px 14px;
-        border-radius: 16px;
-        border: 1px solid #888;
-        font-size: 14px;
-        text-decoration: none;
-        color: #333;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        padding: 9px 18px;
+        border-radius: 22px;
+        border: 1px solid var(--primary);
+        font-size: 0.9rem;
+        color: var(--primary);
         cursor: pointer;
+        transition: all 0.25s ease;
+        background: #ffffff;
+      }
+
+      .download-btn:hover {
+        background: linear-gradient(90deg, var(--primary-soft), var(--primary));
+        color: #fff;
+        box-shadow: 0 6px 16px rgba(37, 117, 252, 0.35);
+      }
+
+      [data-content] {
+        display: none;
+      }
+
+      [data-content].active {
+        display: block;
+      }
+
+      /* ===== FOOTER ===== */
+
+      footer {
+        text-align: center;
+        font-size: 0.85rem;
+        color: #777;
+        padding: 24px 0;
+      }
+
+      .footer-links {
+        margin-top: 10px;
+      }
+
+      .footer-links a {
+        color: var(--primary);
+        margin: 0 10px;
+        font-weight: 500;
+      }
+
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        .nav-tabs {
+          margin-left: 0;
+          justify-content: flex-start;
+        }
+        .page {
+          padding: 18px;
+        }
+        .card {
+          padding: 22px 18px 26px;
+        }
       }
     </style>
   </head>
 
   <body>
-    <div class="top-nav">
-      <a href="/">Home</a>
-      <a href="/en">English</a>
+    <!-- NAVBAR -->
+    <div class="nav-wrapper">
+      <div class="nav">
+        <div class="nav-left" data-tab="about">{jaProfile.nameKanji}</div>
+
+        <div class="nav-tabs">
+          <div class="nav-tab" data-tab="projects">
+            <span class="icon"><i class="fa-solid fa-diagram-project"></i></span
+            >
+            プロジェクト
+          </div>
+          <div class="nav-tab" data-tab="experience">
+            <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
+            職務経歴
+          </div>
+          <div class="nav-tab" data-tab="skills">
+            <span class="icon"><i class="fa-solid fa-code"></i></span>
+            スキル
+          </div>
+          <div class="nav-tab" data-tab="education">
+            <span class="icon"><i class="fa-solid fa-user-graduate"></i></span>
+            学歴
+          </div>
+          <div class="nav-tab" data-tab="certifications">
+            <span class="icon"><i class="fa-solid fa-certificate"></i></span>
+            資格・認定
+          </div>
+        </div>
+      </div>
     </div>
 
-    <header>
-      <h1>{jaProfile.nameKanji}</h1>
-      <div class="label">{jaProfile.nameKana}</div>
-      <div class="label">生年月日：{jaProfile.birth}</div>
-      <div class="label">住所：{jaProfile.address}</div>
-      <div class="label">電話：{jaProfile.phone}</div>
-      <div class="label">E-mail：{jaProfile.email}</div>
-    </header>
+    <!-- CONTENT -->
+    <main class="page">
+      <!-- プロフィール -->
+      <section class="section">
+        <div class="card" data-content="about">
+          <div class="section-title">
+            <i class="fa-solid fa-user"></i> プロフィール
+          </div>
 
-    <section>
-      <h2>概要（自己PR）</h2>
-      <p>{jaProfile.summary}</p>
-      {jaProfile.selfPR && <p>{jaProfile.selfPR}</p>}
-      <div class="download-btn" id="ja-download-btn">
-        履歴書＋職務経歴書（PDF）をダウンロード
+          <div class="about-title">
+            {jaProfile.headline}
+          </div>
+
+          <div class="about-contact">
+            <div class="about-contact-item">
+              <i class="fa-solid fa-signature"></i>
+              {jaProfile.nameKana}
+            </div>
+            <div class="about-contact-item">
+              <i class="fa-solid fa-cake-candles"></i>
+              生年月日：{jaProfile.birth}
+            </div>
+            <div class="about-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              住所：{jaProfile.address}
+            </div>
+            <div class="about-contact-item">
+              <i class="fa-solid fa-phone"></i>
+              {jaProfile.phone}
+            </div>
+            <div class="about-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <a href={"mailto:" + jaProfile.email}>{jaProfile.email}</a>
+            </div>
+            {
+              jaProfile.homepage && (
+                <div class="about-contact-item">
+                  <i class="fa-solid fa-globe" />
+                  <a href={jaProfile.homepage} target="_blank">
+                    {jaProfile.homepage}
+                  </a>
+                </div>
+              )
+            }
+          </div>
+
+          {
+            jaProfile.languages && (
+              <div class="languages">
+                <div class="languages-items">
+                  {jaProfile.languages.map((lang) => (
+                    <span class="badge">
+                      {lang.name}：{lang.level}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          <p class="muted" style="margin-top:16px;">
+            {jaProfile.summary}
+          </p>
+          {jaProfile.selfPR && <p class="muted">{jaProfile.selfPR}</p>}
+
+          <div class="download-btn" id="ja-download-btn">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            履歴書＋職務経歴書（PDF）をダウンロード
+          </div>
+        </div>
+      </section>
+
+      <!-- プロジェクト -->
+      <section class="section">
+        <div class="card" data-content="projects">
+          <div class="section-title">
+            <i class="fa-solid fa-diagram-project"></i> プロジェクト
+          </div>
+          {
+            jaProfile.projects && jaProfile.projects.length > 0 ? (
+              jaProfile.projects.map((p) => (
+                <div class="proj-item">
+                  <div class="exp-role">
+                    {p.name}
+                    {p.tech && <span class="badge">{p.tech}</span>}
+                  </div>
+                  {p.period && <div class="exp-meta">{p.period}</div>}
+                  {p.description && <div class="muted">{p.description}</div>}
+                </div>
+              ))
+            ) : (
+              <div class="muted">
+                代表的なプロジェクトは今後こちらに追記します。
+              </div>
+            )
+          }
+        </div>
+      </section>
+
+      <!-- 職務経歴 -->
+      <section class="section">
+        <div class="card" data-content="experience">
+          <div class="section-title">
+            <i class="fa-solid fa-briefcase"></i> 職務経歴
+          </div>
+          {
+            jaProfile.workHistory?.map((job) => (
+              <div class="exp-item">
+                <div class="exp-role">
+                  {job.period}：{job.company}（{job.location}）
+                </div>
+                <div class="exp-meta">{job.role}</div>
+                {job.details && (
+                  <ul>
+                    {job.details.map((d) => (
+                      <li>{d}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- スキル -->
+      <section class="section">
+        <div class="card" data-content="skills">
+          <div class="section-title">
+            <i class="fa-solid fa-code"></i> スキル
+          </div>
+          <ul>
+            {jaProfile.skills?.map((s) => <li>{s}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <!-- 学歴 -->
+      <section class="section">
+        <div class="card" data-content="education">
+          <div class="section-title">
+            <i class="fa-solid fa-user-graduate"></i> 学歴
+          </div>
+          {
+            jaProfile.education?.map((edu) => (
+              <div class="exp-item">
+                <div class="exp-role">{edu.period}</div>
+                {edu.details && <div class="muted">{edu.details}</div>}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 資格・認定 -->
+      <section class="section">
+        <div class="card" data-content="certifications">
+          <div class="section-title">
+            <i class="fa-solid fa-certificate"></i> 資格・認定
+          </div>
+          {
+            jaProfile.certifications && jaProfile.certifications.length > 0 ? (
+              <ul>
+                {jaProfile.certifications.map((c) => (
+                  <li>{c}</li>
+                ))}
+              </ul>
+            ) : (
+              <div class="muted">
+                取得済みの資格・認定は今後こちらに記載します。
+              </div>
+            )
+          }
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>© 2025 {jaProfile.nameKanji} | Powered by Astro 🚀</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/en">English</a>
       </div>
-    </section>
-
-    <section>
-      <h2>スキル</h2>
-      <ul>
-        {jaProfile.skills.map((s) => <li>{s}</li>)}
-      </ul>
-    </section>
-
-    <section>
-      <h2>職歴</h2>
-      {
-        jaProfile.workHistory.map((job) => (
-          <div>
-            <strong>{job.period}</strong>：{job.company}（{job.location}）
-            <div>{job.role}</div>
-            <ul>
-              {job.details.map((d) => (
-                <li>{d}</li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-    </section>
-
-    <section>
-      <h2>学歴</h2>
-      {
-        jaProfile.education.map((edu) => (
-          <div>
-            <strong>{edu.period}</strong>
-            <div>{edu.details}</div>
-          </div>
-        ))
-      }
-    </section>
+    </footer>
 
     <script is:inline>
-      document.addEventListener("DOMContentLoaded", () => {
-        const btn = document.getElementById("ja-download-btn");
-        if (!btn) return;
+      const tabs = document.querySelectorAll("[data-tab]");
+      const contents = document.querySelectorAll("[data-content]");
+      const nameTab = document.querySelector(".nav-left");
 
+      function activate(tab) {
+        contents.forEach((c) => {
+          c.classList.toggle("active", c.dataset.content === tab);
+        });
+        tabs.forEach((t) => {
+          t.classList.toggle("active", t.dataset.tab === tab);
+        });
+        if (nameTab) {
+          nameTab.classList.toggle("active", tab === "about");
+        }
+      }
+
+      tabs.forEach((t) => {
+        t.addEventListener("click", () => {
+          activate(t.dataset.tab);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      if (nameTab) {
+        nameTab.addEventListener("click", () => {
+          activate("about");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      // PDF ダウンロード（2つ同時）
+      const btn = document.getElementById("ja-download-btn");
+      if (btn) {
         btn.addEventListener("click", () => {
-          const files = [
+          [
             "/downloads/ja-rirekisho.pdf",
             "/downloads/ja-shokumukeirekisho.pdf",
-          ];
-          files.forEach((url) => {
+          ].forEach((url) => {
             const a = document.createElement("a");
             a.href = url;
             a.download = "";
@@ -135,7 +553,10 @@ import jaProfile from "../content/profile-ja.json";
             a.remove();
           });
         });
-      });
+      }
+
+      // 初期表示: プロフィール
+      activate("about");
     </script>
   </body>
 </html>

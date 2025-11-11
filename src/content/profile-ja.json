@@ -1,11 +1,19 @@
 {
   "nameKanji": "徐 鸥珂",
   "nameKana": "ジョ ハク",
+  "headline": "バックエンドエンジニア（Java / SAP / Web）",
   "birth": "1990-05-10",
   "address": "大阪府在住",
   "phone": "080-0000-0000",
   "email": "example@example.com",
+  "homepage": "https://boxushear.github.io/",
   "summary": "日本で勤務しているバックエンドエンジニア。Java、SAP、Web開発を中心に、安定した業務システムの設計・開発に従事。",
+  "selfPR": "要件整理から実装・テストまで一貫して対応可能。日本語・英語・中国語でのコミュニケーションが可能で、多文化環境での開発経験あり。",
+  "languages": [
+    { "name": "日本語", "level": "ビジネス〜流暢（想定）" },
+    { "name": "英語", "level": "流暢（想定）" },
+    { "name": "中国語", "level": "ネイティブ（想定）" }
+  ],
   "skills": [
     "Java／Spring",
     "SAP ABAP／SAP UI5",
@@ -27,9 +35,20 @@
   ],
   "education": [
     {
-      "period": "修士課程修了",
-      "details": "土木工学専攻。その後、ITエンジニアとしてキャリア転換。"
+      "period": "修士課程修了（⼟木工学）",
+      "details": "その後、ソフトウェアエンジニアとしてキャリア転換。バックエンド開発を中心に経験を積む。"
     }
   ],
-  "selfPR": "要件整理から実装・テストまで一貫して対応可能。日本語・英語・中国語でのコミュニケーションが可能で、多文化環境での開発経験あり。"
+  "projects": [
+    {
+      "name": "個人ポートフォリオサイト",
+      "period": "2025",
+      "tech": "Astro / TypeScript / GitHub Actions / Playwright",
+      "description": "英語・日本語対応の個人サイト。GitHub Pages 上にデプロイし、JSON からの自動PDF生成機能（英語CV／日本語履歴書＋職務経歴書）を実装。"
+    }
+  ],
+  "certifications": [
+    "（サンプル）基本情報技術者試験",
+    "（サンプル）AWS Certified Cloud Practitioner"
+  ]
 }

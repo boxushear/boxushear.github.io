@@ -1,8 +1,15 @@
 {
   "name": "Bo Xu",
-  "title": "Backend Engineer / SAP / Java",
+  "title": "Software Engineer",
   "location": "Osaka, Japan",
+  "email": "boxushear@gmail.com",
+  "homepage": "https://boxushear.github.io/",
+  "phone": "+81 080-8010-4134",
   "summary": "Backend engineer with experience in Java, SAP, and web development, currently working in Japan and focusing on reliable, maintainable systems.",
+  "languages": [
+    { "name": "English", "level": "Fluent" },
+    { "name": "Japanese", "level": "Fluent" }
+  ],
   "skills": [
     "Java",
     "Spring / Spring Boot",
@@ -26,11 +33,19 @@
   "education": [
     {
       "school": "Master's in Civil Engineering",
-      "location": "",
       "period": "",
       "details": [
         "Later transitioned into software engineering and backend development."
       ]
     }
-  ]
+  ],
+  "projects": [
+    {
+      "name": "Personal Portfolio Website",
+      "period": "2025",
+      "description": "Bilingual (EN/JA) portfolio deployed on GitHub Pages with automated PDF generation for English CV and Japanese 履歴書/職務経歴書.",
+      "tech": ["Astro", "TypeScript", "GitHub Actions", "Playwright"]
+    }
+  ],
+  "certifications": []
 }
