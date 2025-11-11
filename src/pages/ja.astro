@@ -29,7 +29,6 @@ import jaProfile from "../content/profile-ja.json";
         margin: 0;
         min-height: 100vh;
         font-family:
-          "Inter",
           "Noto Sans JP",
           system-ui,
           -apple-system,
@@ -62,21 +61,43 @@ import jaProfile from "../content/profile-ja.json";
         padding: 16px 24px 0;
         display: flex;
         align-items: flex-end;
-        justify-content: flex-start;
-        gap: 32px;
+        justify-content: space-between;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       }
 
       .nav-left {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         font-weight: 700;
         background: linear-gradient(90deg, var(--primary-soft), var(--primary));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         cursor: pointer;
-        padding-bottom: 6px;
+        padding-bottom: 8px;
         border-bottom: 3px solid transparent;
-        white-space: nowrap;
+      }
+
+      /* 整个名字块 */
+      .nav-left ruby {
+        display: inline-block;
+        ruby-position: over; /* 标准写法：furigana 上側 */
+      }
+
+      /* 汉字部分：做渐变高亮 */
+      .nav-left ruby > :not(rt) {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--primary-soft), var(--primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* 假名部分：只调整字号和颜色，千万别改 display */
+      .nav-left rt {
+        font-size: 0.7rem;
+        font-weight: 400;
+        color: #7b8ba5;
+        letter-spacing: 0.18em;
+        line-height: 1;
       }
 
       .nav-tabs {
@@ -87,7 +108,7 @@ import jaProfile from "../content/profile-ja.json";
       }
 
       .nav-tab {
-        font-size: 0.96rem;
+        font-size: 0.95rem;
         padding: 6px 0;
         cursor: pointer;
         color: var(--text-sub);
@@ -117,17 +138,14 @@ import jaProfile from "../content/profile-ja.json";
         padding: 24px;
       }
 
-      .section {
-        margin-top: 18px;
-      }
-
       .card {
         width: 100%;
-        background: #ffffff;
+        background: #fff;
         border-radius: 18px;
         padding: 28px 28px 32px;
         box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
-        line-height: 1.8;
+        margin-top: 18px;
+        line-height: 1.9;
         text-align: left;
       }
 
@@ -151,17 +169,17 @@ import jaProfile from "../content/profile-ja.json";
       }
 
       .about-title {
-        font-size: 1.05rem;
+        font-size: 1.1rem;
         font-weight: 500;
         color: var(--text-sub);
-        margin-bottom: 8px;
+        margin-bottom: 12px;
       }
 
       .about-contact {
         display: flex;
         flex-wrap: wrap;
         gap: 14px;
-        margin-top: 6px;
+        margin-top: 4px;
         font-size: 0.9rem;
         color: var(--text-sub);
       }
@@ -220,16 +238,16 @@ import jaProfile from "../content/profile-ja.json";
       .download-btn {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        margin-top: 16px;
-        padding: 9px 18px;
-        border-radius: 22px;
+        gap: 6px;
+        margin-top: 14px;
+        padding: 8px 16px;
+        border-radius: 20px;
         border: 1px solid var(--primary);
         font-size: 0.9rem;
         color: var(--primary);
-        cursor: pointer;
+        text-decoration: none;
         transition: all 0.25s ease;
-        background: #ffffff;
+        cursor: pointer;
       }
 
       .download-btn:hover {
@@ -256,7 +274,7 @@ import jaProfile from "../content/profile-ja.json";
       }
 
       .footer-links {
-        margin-top: 10px;
+        margin-top: 12px;
       }
 
       .footer-links a {
@@ -272,7 +290,7 @@ import jaProfile from "../content/profile-ja.json";
       @media (max-width: 720px) {
         .nav {
           flex-wrap: wrap;
-          gap: 10px;
+          align-items: flex-start;
         }
         .nav-tabs {
           margin-left: 0;
@@ -292,7 +310,13 @@ import jaProfile from "../content/profile-ja.json";
     <!-- NAVBAR -->
     <div class="nav-wrapper">
       <div class="nav">
-        <div class="nav-left" data-tab="about">{jaProfile.nameKanji}</div>
+        <!-- 带假名的名字 -->
+        <div class="nav-left" data-tab="about">
+          <ruby>
+            {jaProfile.nameKanji}
+            <rt>{jaProfile.nameKana}</rt>
+          </ruby>
+        </div>
 
         <div class="nav-tabs">
           <div class="nav-tab" data-tab="projects">
@@ -323,178 +347,131 @@ import jaProfile from "../content/profile-ja.json";
     <!-- CONTENT -->
     <main class="page">
       <!-- プロフィール -->
-      <section class="section">
-        <div class="card" data-content="about">
-          <div class="section-title">
-            <i class="fa-solid fa-user"></i> プロフィール
+      <div class="card" data-content="about">
+        <div class="section-title">
+          <i class="fa-solid fa-user"></i> プロフィール
+        </div>
+
+        <div class="about-title">
+          バックエンドエンジニア（Java / SAP / Web）
+        </div>
+
+        <div class="about-contact">
+          <div class="about-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            住所：{jaProfile.address}
           </div>
-
-          <div class="about-title">
-            {jaProfile.headline}
+          <div class="about-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            {jaProfile.phone}
           </div>
-
-          <div class="about-contact">
-            <div class="about-contact-item">
-              <i class="fa-solid fa-signature"></i>
-              {jaProfile.nameKana}
-            </div>
-            <div class="about-contact-item">
-              <i class="fa-solid fa-cake-candles"></i>
-              生年月日：{jaProfile.birth}
-            </div>
-            <div class="about-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              住所：{jaProfile.address}
-            </div>
-            <div class="about-contact-item">
-              <i class="fa-solid fa-phone"></i>
-              {jaProfile.phone}
-            </div>
-            <div class="about-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <a href={"mailto:" + jaProfile.email}>{jaProfile.email}</a>
-            </div>
-            {
-              jaProfile.homepage && (
-                <div class="about-contact-item">
-                  <i class="fa-solid fa-globe" />
-                  <a href={jaProfile.homepage} target="_blank">
-                    {jaProfile.homepage}
-                  </a>
-                </div>
-              )
-            }
+          <div class="about-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <a href={"mailto:" + jaProfile.email}>{jaProfile.email}</a>
           </div>
-
-          {
-            jaProfile.languages && (
-              <div class="languages">
-                <div class="languages-items">
-                  {jaProfile.languages.map((lang) => (
-                    <span class="badge">
-                      {lang.name}：{lang.level}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )
-          }
-
-          <p class="muted" style="margin-top:16px;">
-            {jaProfile.summary}
-          </p>
-          {jaProfile.selfPR && <p class="muted">{jaProfile.selfPR}</p>}
-
-          <div class="download-btn" id="ja-download-btn">
-            <i class="fa-solid fa-file-arrow-down"></i>
-            履歴書＋職務経歴書（PDF）をダウンロード
+          <div class="about-contact-item">
+            <i class="fa-solid fa-globe"></i>
+            <a href="https://boxushear.github.io/" target="_blank">
+              https://boxushear.github.io/
+            </a>
           </div>
         </div>
-      </section>
+
+        <div class="languages">
+          <div class="languages-items">
+            <span class="badge">日本語：流暢</span>
+            <span class="badge">英語：流暢</span>
+            <span class="badge">中国語：ネイティブ</span>
+          </div>
+        </div>
+
+        <p class="muted" style="margin-top:16px;">
+          {jaProfile.summary}
+        </p>
+        {
+          jaProfile.selfPR && (
+            <p class="muted" style="margin-top:4px;">
+              {jaProfile.selfPR}
+            </p>
+          )
+        }
+
+        <div class="download-btn" id="ja-download-btn">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          履歴書＋職務経歴書（PDF）をダウンロード
+        </div>
+      </div>
 
       <!-- プロジェクト -->
-      <section class="section">
-        <div class="card" data-content="projects">
-          <div class="section-title">
-            <i class="fa-solid fa-diagram-project"></i> プロジェクト
-          </div>
-          {
-            jaProfile.projects && jaProfile.projects.length > 0 ? (
-              jaProfile.projects.map((p) => (
-                <div class="proj-item">
-                  <div class="exp-role">
-                    {p.name}
-                    {p.tech && <span class="badge">{p.tech}</span>}
-                  </div>
-                  {p.period && <div class="exp-meta">{p.period}</div>}
-                  {p.description && <div class="muted">{p.description}</div>}
-                </div>
-              ))
-            ) : (
-              <div class="muted">
-                代表的なプロジェクトは今後こちらに追記します。
-              </div>
-            )
-          }
+      <div class="card" data-content="projects">
+        <div class="section-title">
+          <i class="fa-solid fa-diagram-project"></i> プロジェクト
         </div>
-      </section>
+        <div class="muted">
+          今後、主要プロジェクト（案件概要・担当業務・技術スタック）を記載。
+        </div>
+      </div>
 
       <!-- 職務経歴 -->
-      <section class="section">
-        <div class="card" data-content="experience">
-          <div class="section-title">
-            <i class="fa-solid fa-briefcase"></i> 職務経歴
-          </div>
-          {
-            jaProfile.workHistory?.map((job) => (
-              <div class="exp-item">
-                <div class="exp-role">
-                  {job.period}：{job.company}（{job.location}）
-                </div>
-                <div class="exp-meta">{job.role}</div>
-                {job.details && (
-                  <ul>
-                    {job.details.map((d) => (
-                      <li>{d}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))
-          }
+      <div class="card" data-content="experience">
+        <div class="section-title">
+          <i class="fa-solid fa-briefcase"></i> 職務経歴
         </div>
-      </section>
+        {
+          jaProfile.workHistory?.map((job) => (
+            <div class="exp-item">
+              <div class="exp-role">
+                {job.company}（{job.location}）
+              </div>
+              <div class="exp-meta">
+                {job.period}／{job.role}
+              </div>
+              {job.details && (
+                <ul>
+                  {job.details.map((d) => (
+                    <li>{d}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
+      </div>
 
       <!-- スキル -->
-      <section class="section">
-        <div class="card" data-content="skills">
-          <div class="section-title">
-            <i class="fa-solid fa-code"></i> スキル
-          </div>
-          <ul>
-            {jaProfile.skills?.map((s) => <li>{s}</li>)}
-          </ul>
+      <div class="card" data-content="skills">
+        <div class="section-title">
+          <i class="fa-solid fa-code"></i> スキル
         </div>
-      </section>
+        <ul>
+          {jaProfile.skills?.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
 
       <!-- 学歴 -->
-      <section class="section">
-        <div class="card" data-content="education">
-          <div class="section-title">
-            <i class="fa-solid fa-user-graduate"></i> 学歴
-          </div>
-          {
-            jaProfile.education?.map((edu) => (
-              <div class="exp-item">
-                <div class="exp-role">{edu.period}</div>
-                {edu.details && <div class="muted">{edu.details}</div>}
-              </div>
-            ))
-          }
+      <div class="card" data-content="education">
+        <div class="section-title">
+          <i class="fa-solid fa-user-graduate"></i> 学歴
         </div>
-      </section>
+        {
+          jaProfile.education?.map((edu) => (
+            <div class="exp-item">
+              <div class="exp-role">{edu.period}</div>
+              <div class="muted">{edu.details}</div>
+            </div>
+          ))
+        }
+      </div>
 
       <!-- 資格・認定 -->
-      <section class="section">
-        <div class="card" data-content="certifications">
-          <div class="section-title">
-            <i class="fa-solid fa-certificate"></i> 資格・認定
-          </div>
-          {
-            jaProfile.certifications && jaProfile.certifications.length > 0 ? (
-              <ul>
-                {jaProfile.certifications.map((c) => (
-                  <li>{c}</li>
-                ))}
-              </ul>
-            ) : (
-              <div class="muted">
-                取得済みの資格・認定は今後こちらに記載します。
-              </div>
-            )
-          }
+      <div class="card" data-content="certifications">
+        <div class="section-title">
+          <i class="fa-solid fa-certificate"></i> 資格・認定
         </div>
-      </section>
+        <div class="muted">
+          今後取得した資格や認定（例：AWS、Java、SAP 等）を記載予定。
+        </div>
+      </div>
     </main>
 
     <!-- FOOTER -->
@@ -537,7 +514,10 @@ import jaProfile from "../content/profile-ja.json";
         });
       }
 
-      // PDF ダウンロード（2つ同時）
+      // 初期表示
+      activate("about");
+
+      // PDF ダウンロード
       const btn = document.getElementById("ja-download-btn");
       if (btn) {
         btn.addEventListener("click", () => {
@@ -554,9 +534,6 @@ import jaProfile from "../content/profile-ja.json";
           });
         });
       }
-
-      // 初期表示: プロフィール
-      activate("about");
     </script>
   </body>
 </html>
