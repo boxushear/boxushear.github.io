@@ -1,5 +1,30 @@
 ---
 import enProfile from "../content/profile-en.json";
+
+type Project = {
+  name: string;
+  period?: string;
+  description?: string[];
+  tech?: string[] | string;
+};
+
+// 让 TS 明确知道项目结构（把 enProfile 改成 jaProfile 即可复用）
+const projects: Project[] = (enProfile.projects as Project[]) ?? [];
+
+/** 把 description 无论是 string 还是 string[] 统一转成 string[] */
+function toLines(desc: unknown): string[] {
+  if (Array.isArray(desc)) return desc.filter(Boolean).map(String);
+
+  if (typeof desc === "string") {
+    // 优先用换行/分号切；如果只有一句，就直接返回一项
+    const arr = desc
+      .split(/\r?\n|[;；、]/) // 兼容英文分号、日文分号、顿号、“换行”
+      .map((s) => s.trim())
+      .filter(Boolean);
+    return arr.length ? arr : [desc.trim()];
+  }
+  return [];
+}
 ---
 
 <!doctype html>
@@ -282,6 +307,24 @@ import enProfile from "../content/profile-en.json";
           padding: 20px 16px 24px;
         }
       }
+      .proj-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .desc-list {
+        margin: 8px 0 0;
+        padding-left: 22px; /* 缩进 */
+        list-style: decimal; /* 1. 2. 3. 编号 */
+        line-height: 1.8;
+      }
     </style>
   </head>
 
@@ -312,6 +355,10 @@ import enProfile from "../content/profile-en.json";
           <div class="nav-tab" data-tab="certifications">
             <span class="icon"><i class="fa-solid fa-certificate"></i></span>
             Certifications
+          </div>
+          <div class="nav-tab" data-tab="publications">
+            <span class="icon"><i class="fa-solid fa-book-open"></i></span>
+            Research Outputs
           </div>
         </div>
       </div>
@@ -378,17 +425,44 @@ import enProfile from "../content/profile-en.json";
           <div class="section-title">
             <i class="fa-solid fa-diagram-project"></i> Projects
           </div>
+
           {
-            enProfile.projects?.map((p) => (
-              <div class="proj-item">
-                <div class="exp-role">
-                  {p.name}
-                  {p.tech && <span class="badge">{p.tech}</span>}
+            projects.map((p) => {
+              // 技术栈：兼容 string / string[]
+              const techs = Array.isArray(p.tech)
+                ? p.tech
+                : typeof p.tech === "string"
+                  ? p.tech.split(/[,\s]+/).filter(Boolean)
+                  : [];
+
+              // 描述：统一转数组并编号显示
+              const lines = toLines(p.description);
+
+              return (
+                <div class="proj-item">
+                  <div class="exp-role">
+                    {p.name}
+                    {techs.length > 0 && (
+                      <span class="tech-list">
+                        {techs.map((t) => (
+                          <span class="badge">{t}</span>
+                        ))}
+                      </span>
+                    )}
+                  </div>
+
+                  {p.period && <div class="exp-meta">{p.period}</div>}
+
+                  {lines.length > 0 && (
+                    <ol class="desc-list">
+                      {lines.map((line) => (
+                        <li>{line}</li>
+                      ))}
+                    </ol>
+                  )}
                 </div>
-                {p.period && <div class="exp-meta">{p.period}</div>}
-                {p.description && <div class="muted">{p.description}</div>}
-              </div>
-            ))
+              );
+            })
           }
         </div>
       </section>
@@ -471,6 +545,109 @@ import enProfile from "../content/profile-en.json";
             ) : (
               <div class="muted">
                 Certifications and qualifications will be listed here.
+              </div>
+            )
+          }
+        </div>
+      </section>
+
+      <!-- Publications / Talks / Patents -->
+      <section class="section" data-content="publications">
+        <div class="card">
+          <div class="section-title">
+            <i class="fa-solid fa-book-open"></i>
+            Research Outputs
+          </div>
+
+          <!-- Papers -->
+          {
+            enProfile.publications?.papers?.length > 0 && (
+              <>
+                <h3 style="margin-top:10px;">📘 Publications</h3>
+                {enProfile.publications.papers.map((p) => (
+                  <div class="proj-item">
+                    <div class="exp-role">
+                      {p.title}
+                      {p.year && <span class="badge">{p.year}</span>}
+                    </div>
+                    <div class="exp-meta">
+                      {p.authors} | {p.venue}
+                    </div>
+                    {p.description && <div class="muted">{p.description}</div>}
+                    {p.link && (
+                      <div>
+                        <a href={p.link} target="_blank">
+                          [Link]
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )
+          }
+
+          <!-- Talks -->
+          {
+            enProfile.publications?.talks?.length > 0 && (
+              <>
+                <h3 style="margin-top:16px;">🎤 Conference Talks</h3>
+                {enProfile.publications.talks.map((t) => (
+                  <div class="proj-item">
+                    <div class="exp-role">
+                      {t.title}
+                      {t.year && <span class="badge">{t.year}</span>}
+                    </div>
+                    <div class="exp-meta">
+                      {t.event} | {t.location}
+                    </div>
+                    {t.description && <div class="muted">{t.description}</div>}
+                    {t.link && (
+                      <div>
+                        <a href={t.link} target="_blank">
+                          [Event Page]
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )
+          }
+
+          <!-- Patents -->
+          {
+            enProfile.publications?.patents?.length > 0 && (
+              <>
+                <h3 style="margin-top:16px;">🧾 Patents</h3>
+                {enProfile.publications.patents.map((p) => (
+                  <div class="proj-item">
+                    <div class="exp-role">
+                      {p.title}
+                      {p.year && <span class="badge">{p.year}</span>}
+                    </div>
+                    <div class="exp-meta">
+                      {p.inventors}
+                      {p.patentNumber && <span> | {p.patentNumber}</span>}
+                    </div>
+                    {p.description && <div class="muted">{p.description}</div>}
+                    {p.link && (
+                      <div>
+                        <a href={p.link} target="_blank">
+                          [Patent Info]
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )
+          }
+
+          {
+            !enProfile.publications && (
+              <div class="muted">
+                Publications, talks, and patents will be added soon.
               </div>
             )
           }

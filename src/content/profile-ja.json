@@ -1,21 +1,21 @@
 {
   "nameKanji": "徐 博",
   "nameKana": "ジョ ハク",
-  "headline": "バックエンドエンジニア（Java / SAP / Web）",
+  "title": "システムエンジニア（SE）",
+  "gender": "男性",
   "birth": "1990-05-10",
-  "address": "大阪府大阪市",
-  "phone": "080-8010-4134",
-  "email": "boxushear@gmail.com",
+  "address": "大阪市",
+  "phone": "+81 080-8010-4134",
   "homepage": "https://boxushear.github.io/",
+  "email": "boxushear@gmail.com",
   "summary": "日本で勤務しているバックエンドエンジニア。Java、SAP、Web開発を中心に、安定した業務システムの設計・開発に従事。",
-  "selfPR": "要件整理から実装・テストまで一貫して対応可能。日本語・英語・中国語でのコミュニケーションが可能で、多文化環境での開発経験あり。",
   "languages": [
-    { "name": "日本語", "level": "ビジネス〜流暢（想定）" },
-    { "name": "英語", "level": "流暢（想定）" },
-    { "name": "中国語", "level": "ネイティブ（想定）" }
+    { "name": "日本語", "level": "流暢" },
+    { "name": "英語", "level": "流暢" },
+    { "name": "中国語", "level": "ネイティブ" }
   ],
   "skills": [
-    "Java／Spring",
+    "Java／Spring／Spring Boot",
     "SAP ABAP／SAP UI5",
     "JavaScript／TypeScript",
     "RDB（MySQL／Oracle）",
@@ -28,27 +28,152 @@
       "role": "システムエンジニア",
       "period": "2024年～現在",
       "details": [
-        "出版・物流関連のシステム開発・運用保守。",
+        "出版・物流関連の業務システムの開発・運用保守。",
         "AWSおよびSAP関連機能の設計・実装。"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "SAP",
+      "period": "2025年9月〜今",
+      "tech": ["Abaqus", "Matlab", "Python"],
+      "description": [
+        "送電鉄塔に作用する強風をモデル化するため、ダウンバーストの特性解析および風場の数値シミュレーションを実施。",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+      ]
+    },
+    {
+      "name": "PHP",
+      "period": "2025年5月〜2025年8月",
+      "tech": ["Abaqus", "Matlab", "Python"],
+      "description": [
+        "送電鉄塔に作用する強風をモデル化するため、ダウンバーストの特性解析および風場の数値シミュレーションを実施。",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+      ]
+    },
+    {
+      "name": "古河",
+      "period": "2025年2月〜2025年4月",
+      "tech": ["Abaqus", "Matlab", "Python"],
+      "description": [
+        "送電鉄塔に作用する強風をモデル化するため、ダウンバーストの特性解析および風場の数値シミュレーションを実施。",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+      ]
+    },
+    {
+      "name": "AKK",
+      "period": "2024年2月〜2025年1月",
+      "tech": ["Abaqus", "Matlab", "Python"],
+      "description": [
+        "送電鉄塔に作用する強風をモデル化するため、ダウンバーストの特性解析および風場の数値シミュレーションを実施。",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+      ]
+    },
+    {
+      "name": "中京",
+      "period": "2023年11月〜2024年1月",
+      "tech": ["Abaqus", "Matlab", "Python"],
+      "description": [
+        "送電鉄塔に作用する強風をモデル化するため、ダウンバーストの特性解析および風場の数値シミュレーションを実施。",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+      ]
+    },
+    {
+      "name": "grets",
+      "period": "2022年7月〜2023年10月",
+      "tech": ["Abaqus", "Matlab", "Python"],
+      "description": [
+        "送電鉄塔に作用する強風をモデル化するため、ダウンバーストの特性解析および風場の数値シミュレーションを実施。",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+      ]
+    },
+    {
+      "name": "スマートフォン用タッチスクリーンの耐損傷性を向上させる生体模倣型液体光学接着剤（LOCA）の設計研究",
+      "period": "2018年4月〜2023年1月",
+      "tech": [
+        "Abaqus",
+        "MATLAB",
+        "Origin",
+        "Python",
+        "scikit-learn",
+        "pandas",
+        "NumPy"
+      ],
+      "description": [
+        "MTS社製の万能試験機を用いて、三層梁試験体に対して三点曲げ試験を実施した。",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価した。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+      ]
+    },
+    {
+      "name": "送電鉄塔構造の耐風性に関する研究および設計（修士課程研究テーマ）",
+      "period": "2013年9月〜2016年7月",
+      "tech": ["Abaqus", "MATLAB", "Python"],
+      "description": [
+        "送電鉄塔に作用する強風をモデル化するため、ダウンバーストの特性解析および風場の数値シミュレーションを実施。",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
       ]
     }
   ],
   "education": [
     {
-      "period": "修士課程修了（⼟木工学）",
-      "details": "その後、ソフトウェアエンジニアとしてキャリア転換。バックエンド開発を中心に経験を積む。"
-    }
-  ],
-  "projects": [
-    {
-      "name": "個人ポートフォリオサイト",
-      "period": "2025",
-      "tech": "Astro / TypeScript / GitHub Actions / Playwright",
-      "description": "英語・日本語対応の個人サイト。GitHub Pages 上にデプロイし、JSON からの自動PDF生成機能（英語CV／日本語履歴書＋職務経歴書）を実装。"
+      "school": "土木工学専攻 修士課程修了",
+      "period": "",
+      "details": [
+        "その後、ソフトウェアエンジニアとしてバックエンド開発へキャリアチェンジ。"
+      ]
     }
   ],
   "certifications": [
-    "（サンプル）基本情報技術者試験",
-    "（サンプル）AWS Certified Cloud Practitioner"
-  ]
+    "（例）基本情報技術者試験",
+    "（例）AWS Certified Cloud Practitioner"
+  ],
+  "selfPR": "要件整理から実装・テストまで一貫して対応可能。日本語・英語・中国語でのコミュニケーションが可能で、多文化環境での開発経験あり。",
+  "publications": {
+    "papers": [
+      {
+        "title": "Zero-Trust Architecture for Secure Cloud Systems",
+        "authors": "Bo Xu, et al.",
+        "venue": "IEEE Transactions on Cloud Computing",
+        "year": "2024",
+        "link": "https://doi.org/10.xxxx/xxxx",
+        "description": "A paper discussing zero-trust mechanisms in enterprise cloud systems."
+      }
+    ],
+    "talks": [
+      {
+        "title": "Integrating SAP Systems with AWS Lambda",
+        "event": "SAP TechEd Japan 2024",
+        "year": "2024",
+        "location": "Tokyo, Japan",
+        "description": "Conference presentation on automating data flows between SAP ABAP and AWS Lambda."
+      },
+      {
+        "title": "Zero-Trust Security in Multi-Cloud Environments",
+        "event": "JSSEC Security Conference",
+        "year": "2023",
+        "location": "Osaka, Japan",
+        "link": "https://jssec.or.jp/event",
+        "description": "Invited talk covering cloud-native zero-trust architecture design."
+      }
+    ],
+    "patents": [
+      {
+        "title": "Automated Data Synchronization System between SAP and AWS",
+        "inventors": "Bo Xu, Y. Suzuki",
+        "patentNumber": "JP2024-123456",
+        "year": "2024",
+        "link": "",
+        "description": "A patented system for secure synchronization between SAP ERP and AWS Lambda."
+      }
+    ]
+  }
 }

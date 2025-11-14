@@ -12,11 +12,12 @@
     { "name": "Chinese", "level": "Native" }
   ],
   "skills": [
-    "Java",
-    "Spring / Spring Boot",
-    "SAP ABAP / SAP UI5",
-    "JavaScript / TypeScript",
+    "Java / Spring / Spring Boot",
+    "JavaScript / TypeScript / Node.js / React / Vue.js",
     "MySQL / Oracle",
+    "Python / Matlab / C++ /PHP",
+    "Apriso",
+    "SAP ABAP / SAP UI5",
     "AWS (EC2, S3, Lambda)"
   ],
   "experience": [
@@ -42,11 +43,72 @@
   ],
   "projects": [
     {
-      "name": "Personal Portfolio Website",
-      "period": "2025",
-      "description": "Bilingual (EN/JA) portfolio deployed on GitHub Pages with automated PDF generation for English CV and Japanese 履歴書/職務経歴書.",
-      "tech": ["Astro", "TypeScript", "GitHub Actions", "Playwright"]
+      "name": "Bioinspired design of liquid optical clear adhesive (LOCA) for improving the damage resistance of touchscreen in smartphone",
+      "period": "Apr. 2018 - Jan. 2023",
+      "tech": [
+        "Abaqus",
+        "MATLAB",
+        "Origin",
+        "Python",
+        "scikit-learn",
+        "pandas",
+        "NumPy"
+      ],
+      "description": [
+        "Conducted three-point bending tests on three-layer beam specimens using an MTS universal testing machine.",
+        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
+        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+      ]
+    },
+    {
+      "name": "Study and Design on the Wind Resistance of Transmission Tower Structures (Master’s Thesis Research)",
+      "period": "Sep. 2013 - Jul. 2016",
+      "tech": ["Abaqus", "MATLAB", "Python"],
+      "description": [
+        "Conducted analysis of downburst characteristics and numerical simulation of the downburst wind field to model severe wind effects on transmission structures.",
+        "Performed dynamic response analysis of transmission towers subjected to downburst-induced wind loads using finite element simulations in Abaqus.",
+        "Executed structural strengthening and design of transmission tower systems based on dynamic performance, improving resilience under extreme wind events."
+      ]
     }
   ],
-  "certifications": []
+  "certifications": [],
+  "publications": {
+    "papers": [
+      {
+        "title": "Zero-Trust Architecture for Secure Cloud Systems",
+        "authors": "Bo Xu, et al.",
+        "venue": "IEEE Transactions on Cloud Computing",
+        "year": "2024",
+        "link": "https://doi.org/10.xxxx/xxxx",
+        "description": "A paper discussing zero-trust mechanisms in enterprise cloud systems."
+      }
+    ],
+    "talks": [
+      {
+        "title": "Integrating SAP Systems with AWS Lambda",
+        "event": "SAP TechEd Japan 2024",
+        "year": "2024",
+        "location": "Tokyo, Japan",
+        "description": "Conference presentation on automating data flows between SAP ABAP and AWS Lambda."
+      },
+      {
+        "title": "Zero-Trust Security in Multi-Cloud Environments",
+        "event": "JSSEC Security Conference",
+        "year": "2023",
+        "location": "Osaka, Japan",
+        "link": "https://jssec.or.jp/event",
+        "description": "Invited talk covering cloud-native zero-trust architecture design."
+      }
+    ],
+    "patents": [
+      {
+        "title": "Automated Data Synchronization System between SAP and AWS",
+        "inventors": "Bo Xu, Y. Suzuki",
+        "patentNumber": "JP2024-123456",
+        "year": "2024",
+        "link": "",
+        "description": "A patented system for secure synchronization between SAP ERP and AWS Lambda."
+      }
+    ]
+  }
 }
