@@ -1,6 +1,7 @@
 ---
-import jaProfile from '../../content/profile-ja.json';
+import jaProfile from "../../content/profile-ja.json";
 ---
+
 <!doctype html>
 <html lang="ja">
   <head>
@@ -46,7 +47,7 @@ import jaProfile from '../../content/profile-ja.json';
 
     <h2>概要</h2>
     <p>{jaProfile.summary}</p>
-    {jaProfile.selfPR && <p>{jaProfile.selfPR}</p>}
+    {jaProfile.summary && <p>{jaProfile.summary}</p>}
 
     <h2>スキル</h2>
     <ul>
@@ -54,19 +55,28 @@ import jaProfile from '../../content/profile-ja.json';
     </ul>
 
     <h2>職務経歴</h2>
-    {jaProfile.workHistory.map((job) => (
-      <div style="margin-bottom:6px;">
-        <strong>{job.company}</strong>（{job.location}） {job.period}<br />
-        職種：{job.role}
-        <ul>
-          {job.details.map((d) => <li>{d}</li>)}
-        </ul>
-      </div>
-    ))}
+    {
+      jaProfile.experience.map((job) => (
+        <div style="margin-bottom:6px;">
+          <strong>{job.company}</strong>（{job.location}） {job.period}
+          <br />
+          職種：{job.role}
+          <ul>
+            {job.details.map((d) => (
+              <li>{d}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
 
     <h2>学歴</h2>
-    {jaProfile.education.map((edu) => (
-      <div>{edu.period}　{edu.details}</div>
-    ))}
+    {
+      jaProfile.education.map((edu) => (
+        <div>
+          {edu.period}　{edu.details}
+        </div>
+      ))
+    }
   </body>
 </html>
