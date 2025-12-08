@@ -22,26 +22,151 @@
   ],
   "experience": [
     {
-      "company": "KKNEXES",
+      "company": "KKNEXES Co., Ltd.",
       "location": "Osaka, Japan",
       "role": "Software Engineer",
-      "period": "2024 - Present",
+      "period": "2024 – Present",
       "details": [
-        "Developing and maintaining backend systems for publishing and logistics.",
-        "Implementing batch processing with AWS services and SAP-related integrations."
+        "Designing and developing backend systems for internal business applications.",
+        "Maintaining and enhancing publishing and logistics workflows using modern cloud services."
+      ]
+    },
+    {
+      "company": "CHUKYO International Co., Ltd.",
+      "location": "Tokyo, Japan",
+      "role": "Software Engineer",
+      "period": "2023 – 2024",
+      "details": [
+        "Maintained and improved large-scale logistics web systems.",
+        "Implemented feature enhancements and backend logic updates based on business requirements."
+      ]
+    },
+    {
+      "company": "City University of Hong Kong",
+      "location": "Hong Kong",
+      "role": "Research Assistant",
+      "period": "2018 – 2022",
+      "details": [
+        "Conducted computational analysis and supported academic research projects.",
+        "Performed simulation work and contributed to data processing for engineering studies."
+      ]
+    },
+    {
+      "company": "GE (General Electric)",
+      "location": "Wuhan, China",
+      "role": "Structural Engineer",
+      "period": "2017 – 2018",
+      "details": [
+        "Carried out structural analysis and evaluation for engineering components.",
+        "Assisted in design verification and technical documentation."
+      ]
+    },
+    {
+      "company": "Central Southern China Electric Power Design Institute, Energy China",
+      "location": "Wuhan, China",
+      "role": "Structural Engineer",
+      "period": "2016 – 2017",
+      "details": [
+        "Performed structural analysis for power transmission infrastructure.",
+        "Supported engineering design and preparation of technical reports."
       ]
     }
   ],
   "education": [
     {
-      "school": "Master's in Civil Engineering",
-      "period": "",
+      "school": "Master’s in Structural Engineering, Tongji University",
+      "period": "2013 – 2016",
       "details": [
-        "Later transitioned into software engineering and backend development."
+        "Completed advanced coursework including Stochastic Processes and Numerical Analysis.",
+        "Conducted graduate research involving finite element modeling for structural simulation.",
+        "Developed strong analytical skills through mathematical modeling and computational methods."
+      ]
+    },
+    {
+      "school": "Bachelor’s in Engineering Structural Analysis, Wuhan University of Technology",
+      "period": "2009 – 2013",
+      "details": [
+        "Built a solid foundation in applied mathematics through courses such as Calculus, Linear Algebra, Probability Theory, Theoretical Mechanics, Mechanics of Materials, and Elasticity.",
+        "Gained strong analytical understanding essential for engineering modeling and problem-solving."
       ]
     }
   ],
   "projects": [
+    {
+      "name": "Corporate Website & Recruitment System Maintenance (Laravel)",
+      "period": "Nov. 2025 – Present",
+      "tech": ["Laravel", "PHP", "MySQL", "Nginx", "Linux"],
+      "description": [
+        "Migrating the corporate website and recruitment system from an external vendor to in-house servers, including environment setup and configuration.",
+        "Maintaining and troubleshooting the backend codebase built with Laravel to ensure stable system operation.",
+        "Added backend validation to the applicant registration workflow, requiring non-Japanese applicants to select their Japanese language proficiency level."
+      ]
+    },
+    {
+      "name": "Logistics Management System Maintenance (PHP)",
+      "period": "May 2025 – Present",
+      "tech": ["PHP (Legacy)", "HTML", "CSS", "JavaScript", "MySQL"],
+      "description": [
+        "Maintaining and enhancing a legacy logistics management system that handles shipment workflows from customs declaration in China to final delivery in Japan.",
+        "Fixed various production issues including data inconsistency between UI displays and printed documents, especially in return-handling (returns/‘henshin’) workflows.",
+        "Implemented the new address master–update feature, enabling operational staff to upload and synchronize the latest Japan Post address datasets.",
+        "Improved address validation and correction logic to ensure accurate delivery information based on official postal data."
+      ]
+    },
+    {
+      "name": "Manufacturing Execution System (MES) Integration Project (Apriso)",
+      "period": "Feb. 2025 – Apr. 2025",
+      "tech": ["Apriso (DELMIA)", "JavaScript", "C#", "Oracle", "AWS EC2"],
+      "description": [
+        "Designed MES workflows and production operation logic in Apriso based on actual manufacturing processes.",
+        "Implemented operation modules and UI logic using JavaScript and C# within the Apriso framework.",
+        "Conducted functional testing and data verification to ensure correct workflow execution and overall system stability."
+      ]
+    },
+    {
+      "name": "LPG Order & Delivery Management System",
+      "period": "Feb. 2024 – Jan. 2025",
+      "tech": [
+        "Java",
+        "Spring Boot",
+        "React",
+        "Oracle Database",
+        "Docker",
+        "Git"
+      ],
+      "description": [
+        "Designed and implemented backend modules for LPG order processing and delivery scheduling, including multi-region order workflows and unit conversions for different LPG supply types (Bulk, Cylinder, etc.).",
+        "Developed calculation and forecasting logic based on historical delivery data, improving delivery planning accuracy and reducing manual workload for branch staff.",
+        "Implemented invoice and billing generation modules, integrating with Oracle DB and ensuring data consistency and stable system performance under high-volume transactions."
+      ]
+    },
+    {
+      "name": "Publishing Demand Forecast Batch System",
+      "period": "Nov. 2023 – Jan. 2024",
+      "tech": ["Python", "AWS Lambda", "Amazon S3", "Amazon RDS"],
+      "description": [
+        "Developed Python batch scripts to parse Excel sales files uploaded by bookstores and perform multi-level data validation, including empty-file checks, column-format validation, and business-rule verification. Implemented error-handling logic to log detailed failure information and automatically move invalid files to designated S3 buckets for later inspection.",
+        "Implemented the backend data-processing workflow using AWS S3 and Lambda, ensuring automatic retrieval of uploaded files, execution of batch logic, and delivery of processed results to downstream systems.",
+        "Created and executed unit tests for key data-processing modules to validate business rules and ensure stable batch execution prior to integration with the publisher’s backend systems."
+      ]
+    },
+    {
+      "name": "ClientSphere CRM",
+      "period": "Jul. 2022 – Oct. 2023",
+      "tech": [
+        "Java",
+        "Spring Boot",
+        "JavaScript",
+        "Vue.js",
+        "MyBatis",
+        "MySQL"
+      ],
+      "description": [
+        "Designed and implemented core customer-management features, including customer registration, profile editing, intent tracking, and de-duplication logic based on matching rules (name, phone, email). Ensured accurate customer assignment and prevented duplicate ownership among sales staff.",
+        "Developed a role-based access control (RBAC) system in Spring Boot, enabling sales staff to access only their assigned customers while allowing managers and administrators to view subordinate sales data and perform high-level administrative operations.",
+        "Designed RESTful APIs and implemented the data access layer with MyBatis (mappers and SQL tuning). Improved performance by optimizing slow queries and adding indexes, and strengthened stability through input validation, exception handling, and basic unit tests."
+      ]
+    },
     {
       "name": "Bioinspired design of liquid optical clear adhesive (LOCA) for improving the damage resistance of touchscreen in smartphone",
       "period": "Apr. 2018 - Jan. 2023",
@@ -56,8 +181,8 @@
       ],
       "description": [
         "Conducted three-point bending tests on three-layer beam specimens using an MTS universal testing machine.",
-        "Abaqus を用いて、ダウンバーストによる風荷重を受ける送電鉄塔の動的応答解析を実施し、構造の挙動を評価。",
-        "動的性能に基づく送電鉄塔構造の強化および設計を行い、極端風に対する耐久性と安定性の向上を図った。"
+        "Simulated stress and strain distributions in three-layer beam specimens with different LOCA materials using finite element analysis in Abaqus.",
+        "Analized experimental and simulation data with Python and MATLAB to evaluate the effects of LOCA material properties on the mechanical performance of touchscreen structures."
       ]
     },
     {
@@ -71,7 +196,10 @@
       ]
     }
   ],
-  "certifications": [],
+  "certifications": [
+    "Cisco Certified Network Associate (CCNA)",
+    "AWS Certified Solutions Architect – Associate (SAA)"
+  ],
   "publications": {
     "papers": [
       {

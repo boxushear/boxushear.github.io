@@ -226,13 +226,48 @@ function toLines(desc: unknown): string[] {
         margin: 6px 0 0;
       }
 
-      .exp-item,
-      .proj-item {
-        margin-bottom: 14px;
+      .exp-item {
+        padding: 14px 0 8px;
       }
 
-      .exp-role {
-        font-weight: 600;
+      .exp-item + .exp-item {
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        margin-top: 12px;
+      }
+
+      /* 每个项目块之间拉开距离，加分隔线 */
+      .proj-item {
+        margin-bottom: 1.8rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .proj-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      /* 项目标题专用样式 */
+      .proj-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1f2937;
+      }
+
+      /* 项目标题 + 技术栈一排显示（你已经有 .proj-head，可以继续用） */
+      .proj-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 0.25rem;
+      }
+
+      .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
       }
 
       .exp-meta {
@@ -307,23 +342,72 @@ function toLines(desc: unknown): string[] {
           padding: 20px 16px 24px;
         }
       }
-      .proj-head {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .tech-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
       .desc-list {
         margin: 8px 0 0;
         padding-left: 22px; /* 缩进 */
         list-style: decimal; /* 1. 2. 3. 编号 */
         line-height: 1.8;
+      }
+
+      /* ===== Education layout ===== */
+
+      .edu-item {
+        padding: 16px 0;
+      }
+
+      /* 从第二个学历开始，上面加一条分隔线，拉开区分 */
+      .edu-item + .edu-item {
+        border-top: 1px solid rgba(148, 163, 184, 0.35);
+        margin-top: 12px;
+      }
+
+      .edu-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 6px;
+      }
+
+      .edu-degree {
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+
+      .edu-period {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+        white-space: nowrap;
+      }
+
+      .edu-details {
+        margin: 4px 0 0;
+        padding-left: 20px;
+        color: var(--text-sub);
+      }
+
+      .exp-role {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 4px;
+      }
+
+      /* 公司 + 地点 + 时间，放成一行的次要信息 */
+      .exp-meta {
+        font-size: 0.88rem;
+        color: var(--text-sub);
+        margin-bottom: 4px;
+      }
+
+      /* 职责列表的样式稍微拉开一点 */
+      .exp-item ul {
+        margin-top: 8px;
+        padding-left: 22px;
+      }
+
+      .exp-item li {
+        margin-bottom: 4px;
       }
     </style>
   </head>
@@ -356,10 +440,10 @@ function toLines(desc: unknown): string[] {
             <span class="icon"><i class="fa-solid fa-certificate"></i></span>
             Certifications
           </div>
-          <div class="nav-tab" data-tab="publications">
+          <!-- <div class="nav-tab" data-tab="publications">
             <span class="icon"><i class="fa-solid fa-book-open"></i></span>
             Research Outputs
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -440,8 +524,8 @@ function toLines(desc: unknown): string[] {
 
               return (
                 <div class="proj-item">
-                  <div class="exp-role">
-                    {p.name}
+                  <div class="proj-head">
+                    <span class="proj-title">{p.name}</span>
                     {techs.length > 0 && (
                       <span class="tech-list">
                         {techs.map((t) => (
@@ -511,13 +595,17 @@ function toLines(desc: unknown): string[] {
           <div class="section-title">
             <i class="fa-solid fa-user-graduate"></i> Education
           </div>
+
           {
             enProfile.education?.map((edu) => (
-              <div class="exp-item">
-                <div class="exp-role">{edu.school}</div>
-                {edu.period && <div class="exp-meta">{edu.period}</div>}
+              <div class="edu-item">
+                <div class="edu-head">
+                  <div class="edu-degree">{edu.school}</div>
+                  {edu.period && <div class="edu-period">{edu.period}</div>}
+                </div>
+
                 {edu.details && (
-                  <ul>
+                  <ul class="edu-details">
                     {edu.details.map((d) => (
                       <li>{d}</li>
                     ))}
