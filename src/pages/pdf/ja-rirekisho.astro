@@ -1,6 +1,7 @@
 ---
-import jaProfile from '../../content/profile-ja.json';
+import jaProfile from "../../content/profile-ja.json";
 ---
+
 <!doctype html>
 <html lang="ja">
   <head>
@@ -27,7 +28,8 @@ import jaProfile from '../../content/profile-ja.json';
         border-collapse: collapse;
         margin-bottom: 6px;
       }
-      th, td {
+      th,
+      td {
         border: 1px solid #000;
         padding: 4px 6px;
         vertical-align: top;
@@ -78,19 +80,26 @@ import jaProfile from '../../content/profile-ja.json';
       <tr>
         <th>学歴</th>
         <td>
-          {jaProfile.education.map((edu) => (
-            <div>{edu.period}　{edu.details}</div>
-          ))}
+          {
+            jaProfile.education.map((edu) => (
+              <div>
+                {edu.period}　{edu.details}
+              </div>
+            ))
+          }
         </td>
       </tr>
       <tr>
         <th>職歴</th>
         <td>
-          {jaProfile.workHistory.map((job) => (
-            <div>
-              {job.period}　{job.company}（{job.location}） {job.role}<br />
-            </div>
-          ))}
+          {
+            jaProfile.experience.map((job) => (
+              <div>
+                {job.period}　{job.company}（{job.location}） {job.role}
+                <br />
+              </div>
+            ))
+          }
         </td>
       </tr>
     </table>
@@ -100,13 +109,18 @@ import jaProfile from '../../content/profile-ja.json';
         <th>自己PR</th>
         <td>
           <div>{jaProfile.summary}</div>
-          {jaProfile.selfPR && <div style="margin-top:4px;">{jaProfile.selfPR}</div>}
+          {
+            jaProfile.summary && (
+              <div style="margin-top:4px;">{jaProfile.summary}</div>
+            )
+          }
         </td>
       </tr>
     </table>
 
     <div class="small">
-      ※ 本サンプルは自動生成用レイアウトです。必要に応じて実案件向けに調整してください。
+      ※
+      本サンプルは自動生成用レイアウトです。必要に応じて実案件向けに調整してください。
     </div>
   </body>
 </html>
