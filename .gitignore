@@ -3,6 +3,7 @@
 # ==========================
 
 # build outputs
+JACVRE/
 dist/
 .astro/
 .vite/

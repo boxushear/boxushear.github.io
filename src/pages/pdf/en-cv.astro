@@ -1,6 +1,13 @@
 ---
-import enProfile from '../../content/profile-en.json';
+import enProfile from "../../content/profile-en.json";
+
+const education = enProfile.education ?? [];
+const experience = enProfile.experience ?? [];
+const projects = enProfile.projects ?? [];
+const certifications = enProfile.certifications ?? [];
+const languages = enProfile.languages ?? [];
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,79 +16,461 @@ import enProfile from '../../content/profile-en.json';
     <style>
       @page {
         size: A4;
-        margin: 20mm;
+        margin: 18mm 20mm;
       }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 11pt;
         margin: 0;
         padding: 0;
+        color: #222;
+        font-family:
+          "Times New Roman",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        font-size: 10.5pt;
+        line-height: 1.4;
       }
-      h1 {
-        font-size: 20pt;
-        margin: 0 0 4px;
-      }
+
+      h1,
       h2 {
-        font-size: 12pt;
-        margin: 14px 0 4px;
-        border-bottom: 1px solid #000;
-        padding-bottom: 2px;
+        font-family: Calibri, "Segoe UI", sans-serif;
+        font-weight: bold;
       }
-      .meta {
+
+      h1 {
+        font-size: 22pt;
+        letter-spacing: 0.04em;
+      }
+
+      h2.section-title {
+        font-size: 13pt;
+        margin-bottom: 2pt;
+      }
+
+      .page {
+        width: 100%;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12pt;
+      }
+
+      .header-left {
+        flex: 1;
+      }
+
+      .header-title {
+        font-size: 9.5pt;
+        color: #555;
+        margin-top: -4pt;
+      }
+
+      .header-right {
+        text-align: right;
+        font-size: 12pt;
+        color: #444;
+      }
+
+      .contact-line {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10pt;
+      }
+
+      .contact-item {
+        white-space: nowrap;
+      }
+
+      .icon {
+        display: inline-block;
         font-size: 9pt;
+        margin-right: 3pt;
+      }
+
+      .section {
+        margin-top: 14pt; /* section 间距明显一点 */
+      }
+
+      .section-header {
+        margin-bottom: 4pt;
+      }
+
+      .section-title-row {
+        display: flex;
+        align-items: center;
+        gap: 5pt;
+      }
+
+      .section-bookmark {
+        width: 9pt;
+        height: 11pt;
+        background: #b01f4b;
+        border-radius: 1.5pt 1.5pt 0 0;
+        position: relative;
+      }
+
+      .section-bookmark::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -4pt;
+        margin: auto;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 4pt 4.5pt 0 4.5pt;
+        border-color: #b01f4b transparent transparent transparent;
+      }
+
+      .section-line {
+        margin-top: 2pt;
+        height: 3pt; /* 粗一点 */
+        background: linear-gradient(90deg, #7cb342, #c5e1a5, rgba(0, 0, 0, 0));
+      }
+
+      /* timeline 行：日期 + 图标 + 内容 */
+      .timeline-list {
+        margin-top: 4pt;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 70pt 14pt 1fr;
+        column-gap: 6pt;
+        margin-bottom: 5pt;
+        font-size: 10pt;
+      }
+
+      .timeline-period {
+        color: #444;
+        white-space: nowrap;
+      }
+
+      .row-bookmark {
+        width: 8pt;
+        height: 10pt;
+        background: #b01f4b;
+        border-radius: 1.5pt 1.5pt 0 0;
+        position: relative;
+        margin-top: 1pt;
+      }
+
+      .row-bookmark::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3pt;
+        margin: auto;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 3pt 4pt 0 4pt;
+        border-color: #b01f4b transparent transparent transparent;
+      }
+
+      .timeline-main-title {
+        font-weight: 700;
+      }
+
+      .timeline-sub {
+        font-size: 9.5pt;
+        color: #444;
+      }
+
+      .bullet-list {
+        margin: 2pt 0 0 0;
+        padding-left: 12pt;
+      }
+
+      .bullet-list li {
+        margin-bottom: 1pt;
+      }
+
+      /* Experience */
+      .exp-item {
+        margin-bottom: 6pt;
+      }
+
+      .exp-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8pt;
+      }
+
+      .exp-role {
+        font-weight: 700;
+      }
+
+      .exp-meta {
+        font-size: 9.5pt;
         color: #555;
       }
-      ul {
-        margin: 4px 0 0 18px;
-        padding: 0;
+
+      /* Projects */
+      .project-item {
+        margin-bottom: 6pt;
       }
-      .section {
-        margin-top: 8px;
+
+      .project-header {
+        display: grid;
+        grid-template-columns: 14pt 1fr;
+        column-gap: 6pt;
+      }
+
+      .project-title {
+        font-weight: 700;
+      }
+
+      .project-period {
+        font-size: 9.5pt;
+        color: #555;
+      }
+
+      .project-tech {
+        font-size: 9pt;
+        font-style: italic;
+        margin-top: 1pt;
+      }
+
+      /* 小书签图标（复用在 Languages / Certifications 中） */
+      .bookmark-small {
+        width: 8pt;
+        height: 10pt;
+        background: #b01f4b;
+        border-radius: 1.5pt 1.5pt 0 0;
+        position: relative;
+        margin-top: 1pt;
+      }
+
+      .bookmark-small::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3pt;
+        margin: auto;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 3pt 4pt 0 4pt;
+        border-color: #b01f4b transparent transparent transparent;
+      }
+
+      /* Summary 在最后，首行缩进两格 */
+      .summary-text {
+        margin-top: 4pt;
+        text-indent: 2em;
+        font-size: 10.5pt;
       }
     </style>
   </head>
+
   <body>
-    <h1>{enProfile.name}</h1>
-    <div class="meta">
-      {enProfile.title}<br />
-      {enProfile.location}
-    </div>
-
-    <div class="section">
-      <h2>Profile</h2>
-      <p>{enProfile.summary}</p>
-    </div>
-
-    <div class="section">
-      <h2>Skills</h2>
-      <ul>
-        {enProfile.skills.map((s) => <li>{s}</li>)}
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>Experience</h2>
-      {enProfile.experience.map((job) => (
-        <div style="margin-bottom:6px;">
-          <strong>{job.role}</strong> - {job.company} ({job.period})<br />
-          <span class="meta">{job.location}</span>
-          <ul>
-            {job.details.map((d) => <li>{d}</li>)}
-          </ul>
+    <div class="page">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <h1>{enProfile.name}</h1>
+          <div class="header-title">{enProfile.title}</div>
         </div>
-      ))}
-    </div>
-
-    <div class="section">
-      <h2>Education</h2>
-      {enProfile.education.map((edu) => (
-        <div style="margin-bottom:4px;">
-          <strong>{edu.school}</strong> {edu.period && `(${edu.period})`}
-          <ul>
-            {edu.details.map((d) => <li>{d}</li>)}
-          </ul>
+        <div class="header-right">
+          <div class="contact-line">
+            <span class="contact-item">
+              <span class="icon">📍</span>{enProfile.location}
+            </span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-item">
+              <span class="icon">✉</span>{enProfile.email}
+            </span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-item">
+              <span class="icon">☎</span>{enProfile.phone}
+            </span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-item">
+              <span class="icon">🌐</span>{enProfile.homepage}
+            </span>
+          </div>
         </div>
-      ))}
+      </header>
+
+      <!-- 1. Education -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title-row">
+            <h2 class="section-title">Education</h2>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="timeline-list">
+          {
+            education.map((edu) => (
+              <div class="timeline-item">
+                <div class="timeline-period">{edu.period}</div>
+                <div>
+                  <div class="row-bookmark" />
+                </div>
+                <div>
+                  <div class="timeline-main-title">{edu.school}</div>
+                  {edu.details && (
+                    <ul class="bullet-list">
+                      {edu.details.map((d) => (
+                        <li>{d}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 2. Experience -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title-row">
+            <h2 class="section-title">Experience</h2>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        <div>
+          {
+            experience.map((job) => (
+              <div class="exp-item">
+                <div class="exp-title-row">
+                  <div class="exp-role">
+                    {job.role} – {job.company}
+                  </div>
+                  <div class="exp-meta">{job.period}</div>
+                </div>
+                <div class="exp-meta">{job.location}</div>
+                {job.details && (
+                  <ul class="bullet-list">
+                    {job.details.map((d) => (
+                      <li>{d}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 3. Projects -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title-row">
+            <h2 class="section-title">Projects</h2>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        <div>
+          {
+            projects.map((p) => (
+              <div class="project-item">
+                <div class="project-header">
+                  <div>
+                    <div class="row-bookmark" />
+                  </div>
+                  <div>
+                    <div class="project-title">
+                      {p.name}
+                      {p.period && `  [${p.period}]`}
+                    </div>
+                    {p.tech && (
+                      <div class="project-tech">
+                        Tech Stack:{" "}
+                        {Array.isArray(p.tech) ? p.tech.join(", ") : p.tech}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {p.description && (
+                  <ul class="bullet-list">
+                    {p.description.map((d) => (
+                      <li>{d}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 4. Languages -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title-row">
+            <h2 class="section-title">Languages</h2>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        {
+          languages && languages.length > 0 && (
+            <ul class="bullet-list">
+              {languages.map((lang) => (
+                <li>
+                  {lang.name}: {lang.level}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </section>
+
+      <!-- 5. Certifications -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title-row">
+            <h2 class="section-title">Certifications</h2>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        {
+          certifications && certifications.length > 0 && (
+            <ul class="bullet-list">
+              {certifications.map((c) => (
+                <li>{c}</li>
+              ))}
+            </ul>
+          )
+        }
+      </section>
+
+      <!-- 6. Summary -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title-row">
+            <h2 class="section-title">Summary</h2>
+          </div>
+          <div class="section-line"></div>
+        </div>
+        <p class="summary-text">{enProfile.summary}</p>
+      </section>
     </div>
   </body>
 </html>
